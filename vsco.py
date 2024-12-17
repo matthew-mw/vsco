@@ -69,7 +69,7 @@ def download_vsco_images(username):
     params = {"cursor": "", "site_id": site_id}
     page_count = 0
 
-    with zipfile.ZipFile(ZIP_FILENAME, "w", zipfile.ZIP_DEFLATED) as zipf:
+    with zipfile.ZipFile(f"{username}_{ZIP_FILENAME}", "w", zipfile.ZIP_DEFLATED) as zipf:
         while True:
             page_count += 1
             print(f"Fetching page {page_count}, using cursor={params['cursor']}")
@@ -122,7 +122,7 @@ def download_vsco_images(username):
                 zipf.writestr(f"{file_id}.jpg", img_response.content)
                 print(f"Saved image {file_id}.jpg to ZIP.")
 
-    print(f"All images zipped into {ZIP_FILENAME}")
+    print(f"All images zipped into {username}_{ZIP_FILENAME}")
 
 if __name__ == "__main__":
     vsco_username = input("Enter VSCO username: ").strip()
